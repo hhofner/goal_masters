@@ -22,12 +22,13 @@ export function LeagueSelector({ selectedLeagueId }: { selectedLeagueId: number 
 
 export function MatchdaySelector({ currentMatchday, leagueId }: { currentMatchday: number, leagueId: number }) {
   // TODO: get max matchday
-  const beforeMatchday = Math.max(currentMatchday - 1, 1)
+  const beforeMatchday = currentMatchday - 1
+  console.log(beforeMatchday)
   const afterMatchday = currentMatchday + 1
   return (
     <div class="flex gap-2 items-center" id="matchdaySelector" hx-swap-oob="true">
       <button
-        class="flex"
+        class={`flex ${beforeMatchday === 0 ? "invisible" : ""}`}
         hx-get={`/matches/${leagueId}/${beforeMatchday}`}
         hx-target="#matches"
         hx-swap="innerHTML"

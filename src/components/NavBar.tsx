@@ -3,7 +3,9 @@ import * as elements from "typed-html";
 export enum Routes {
   "MATCHES",
   "TABLES",
-  "ABOUT"
+  "ABOUT",
+  "SIGNIN",
+  "REGISTER"
 }
 
 function Dot() {
@@ -16,15 +18,15 @@ export default function NavBar({ selected }: { selected: Routes }) {
       <h1 class="text-4xl">Goal Masters</h1>
       <nav>
         <ul class="flex gap-4">
-          <li class="relative">
+          <li class={`relative ${selected === Routes.MATCHES ? "" : "text-gray-400"}`}>
             <a href="/">Matches</a>
             {selected === Routes.MATCHES ? <Dot /> : ""}
           </li>
-          <li class="relative">
+          <li class={`relative ${selected === Routes.TABLES ? "" : "text-gray-400"}`}>
             <a href="/table">Table</a>
             {selected === Routes.TABLES ? <Dot /> : ""}
           </li>
-          <li class="relative">
+          <li class={`relative ${selected === Routes.ABOUT ? "" : "text-gray-400"}`}>
             <a href="/about">About</a>
             {selected === Routes.ABOUT ? <Dot /> : ""}
           </li>

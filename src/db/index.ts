@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 // If dev use dev database URL
 var client
-if (process.env.NODE_ENV === "development") {
+if (process.env.ENV === "development") {
   client = createClient({
     url: process.env.DEV_DATABASE_URL!,
     authToken: process.env.DEV_DATABASE_AUTH_TOKEN,
