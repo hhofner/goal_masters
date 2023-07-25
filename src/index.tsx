@@ -5,11 +5,13 @@ import * as elements from "typed-html";
 // import { Todo, todos } from "./db/schema";
 // import { eq } from "drizzle-orm";
 
-import NavBar, { Routes } from "./components/NavBar";
-import matchesRoute from "./routes/matches";
+import NavBar, { Routes } from "./components/NavBar"
+import matchesRoute from "./routes/matches"
+import authRoutes from "./routes/auth"
 
 const app = new Elysia()
   .use(html())
+  .use(authRoutes)
   .use(matchesRoute)
   .get("/table", ({ html }) =>
     html(

@@ -1,6 +1,26 @@
 import { InferModel, relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
+export const users = sqliteTable("users", {
+  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  username: text("username").notNull(),
+  password: text("password").notNull(),
+  email: text("email").notNull(),
+})
+
+export const sessions = sqliteTable("sessions", {
+  token: text("token").primaryKey(),
+  user: integer("user", { mode: "number" }).notNull(),
+  expires: text("expires").notNull(),
+})
+
+export const usersToSessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.user],
+    references: [users.id],
+  })
+}))
+
 export const matches = sqliteTable("matches", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   homeTeam: integer("homeTeam", { mode: "number" }).notNull(),
